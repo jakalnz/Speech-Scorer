@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Increment Input</title>
+    <style>
+        /* Optional: Add some basic styling for better visibility */
+        input[type="number"] {
+            width: 100px;
+            padding: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <input type="number" id="myInput" min="-10" max="100" step="5" value="0">
+    <button onclick="incrementValue()">+</button>
+    <button onclick="decrementValue()">-</button>
+
+    <script>
+        function incrementValue() {
+            const input = document.getElementById("myInput");
+            const currentValue = parseInt(input.value);
+            const newValue = currentValue + 5;
+            if (newValue <= 100) {
+                input.value = newValue;
+            }
+        }
+
+        function decrementValue() {
+            const input = document.getElementById("myInput");
+            const currentValue = parseInt(input.value);
+            const newValue = currentValue - 5;
+            if (newValue >= -10) {
+                input.value = newValue;
+            }
+        }
+    </script>
+</body>
+</html>

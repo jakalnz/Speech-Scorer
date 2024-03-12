@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Addition Form</title>
+    <style>
+        /* ... (existing styles) ... */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Advanced Addition Form</h1>
+    <form id="additionForm">
+        <!-- ... (existing buttons) ... -->
+        <button id="earButton" type="button" onclick="toggleEar()">Left</button>
+        <input type="number" id="levelInput" placeholder="Enter Level" min="-10" max="100">
+        <button type="button" onclick="storeResult()">Store</button>
+    </form>
+
+    <p id="result">Result: 0</p>
+    <p id="history">History:</p>
+
+    <table>
+        <caption>Stored Results</caption>
+        <thead>
+            <tr>
+                <th>Ear</th>
+                <th>Level</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody id="resultsTableBody">
+            <!-- Rows will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <script>
+        let total = 35;
+        let history = [];
+        let currentEar = "Left"; // Default value
+
+        function addNumber(number) {
+            // ... (existing addNumber function) ...
+        }
+
+        function clearSum() {
+            // ... (existing clearSum function) ...
+        }
+
+        function undoLastAddition() {
+            // ... (existing undoLastAddition function) ...
+        }
+
+        function toggleEar() {
+            const button = document.getElementById("earButton");
+            if (button.innerText === "Left") {
+                button.innerText = "Right";
+            } else {
+                button.innerText = "Left";
+            }
+            currentEar = button.innerText
+            // currentEar = currentEar === "Left" ? "Right" : "Left";
+
+        }
+
+        function storeResult() {
+            const levelInput = document.getElementById("levelInput");
+            const level = parseInt(levelInput.value, 10);
+            const score = parseInt(total,10);
+            if (!isNaN(level)) {
+                addResultRow(currentEar, level, score);
+                levelInput.value = ""; // Clear input field
+            }
+        }
+
+        function addResultRow(ear, level, score) {
+            const tableBody = document.getElementById("resultsTableBody");
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `<td>${ear}</td><td>${level}</td><td>${score}</td>`;
+            tableBody.appendChild(newRow);
+        }
+
+        // ... (existing updateHistory function) ...
+
+        // ... (existing keyboard shortcuts and other code) ...
+    </script>
+</body>
+</html>

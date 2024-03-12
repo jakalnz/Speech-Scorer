@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVC Addition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        #additionForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        #history {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Modern Addition Form</h1>
+    <form id="additionForm">
+        <button type="button" onclick="addNumber(0)">Add 0 (Press 0)</button>
+        <button type="button" onclick="addNumber(3)">Add 3 (Press 1)</button>
+        <button type="button" onclick="addNumber(7)">Add 7 (Press 2)</button>
+        <button type="button" onclick="addNumber(10)">Add 10 (Press 3)</button>
+        <p id="history">History:</p>
+        <button type="button" onclick="clearSum()">Clear Sum</button>
+        <button type="button" onclick="undoLastAddition()">Undo Last</button>
+    </form>
+
+    <p id="result">Result: 0</p>
+
+    <script>
+        let total = 0;
+        let history = [];
+
+        function addNumber(number) {
+            total += number;
+            history.push(number);
+            document.getElementById("result").textContent = `Result: ${total}`;
+            updateHistory();
+        }
+
+        function clearSum() {
+            total = 0;
+            history = [];
+            document.getElementById("result").textContent = `Result: ${total}`;
+            updateHistory();
+        }
+
+        function undoLastAddition() {
+            if (history.length > 0) {
+                const lastAdded = history.pop();
+                total -= lastAdded;
+                document.getElementById("result").textContent = `Result: ${total}`;
+                updateHistory();
+            }
+        }
+
+        function updateHistory() {
+            const historyList = history.map((num, index) => `${index + 1}. ${num}`).join("<br>");
+            document.getElementById("history").innerHTML = `History:<br>${historyList}`;
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener("keydown", handleKeyPress);
+
+        function handleKeyPress(event) {
+            switch (event.key) {
+                case "0":
+                    addNumber(0);
+                    break;
+                case "1":
+                    addNumber(3);
+                    break;
+                case "2":
+                    addNumber(7);
+                    break;
+                case "3":
+                    addNumber(10);
+                    break;
+                default:
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
+
